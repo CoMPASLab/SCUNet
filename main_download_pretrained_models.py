@@ -29,7 +29,7 @@ download SwinIR models:
 
 download VRT models:
     python main_download_pretrained_models.py --models "VRT" --model_dir "model_zoo"
-    
+
 download other models:
     python main_download_pretrained_models.py --models "others" --model_dir "model_zoo"
 
@@ -46,7 +46,7 @@ download DnCNN models and 'BSRGAN.pth'
 """
 
 
-def download_pretrained_model(model_dir='model_zoo', model_name='dncnn3.pth'):
+def download_pretrained_model(model_dir='models', model_name='dncnn3.pth'):
     if os.path.exists(os.path.join(model_dir, model_name)):
         print(f'already exists, skip downloading [{model_name}]')
     else:
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--models',
                         type=lambda s: re.split(' |, ', s),
-                        default = "dncnn3.pth",
+                        default="dncnn3.pth",
                         help='comma or space delimited list of characters, e.g., "DnCNN", "DnCNN BSRGAN.pth", "dncnn_15.pth dncnn_50.pth"')
     parser.add_argument('--model_dir', type=str, default='model_zoo', help='path of model_zoo')
     args = parser.parse_args()
@@ -83,23 +83,23 @@ if __name__ == '__main__':
                         'BSRGAN': ['BSRGAN.pth', 'BSRNet.pth', 'BSRGANx2.pth'],
                         'IRCNN': ['ircnn_color.pth', 'ircnn_gray.pth'],
                         'SCUNet': ['scunet_gray_15.pth', 'scunet_gray_25.pth', 'scunet_gray_50.pth', 'scunet_color_15.pth', 'scunet_color_25.pth', 'scunet_color_50.pth', 'scunet_color_real_psnr.pth', 'scunet_color_real_gan.pth'],
-                        'SwinIR': ['001_classicalSR_DF2K_s64w8_SwinIR-M_x2.pth', '001_classicalSR_DF2K_s64w8_SwinIR-M_x3.pth', 
-                                   '001_classicalSR_DF2K_s64w8_SwinIR-M_x4.pth', '001_classicalSR_DF2K_s64w8_SwinIR-M_x8.pth', 
-                                   '001_classicalSR_DIV2K_s48w8_SwinIR-M_x2.pth', '001_classicalSR_DIV2K_s48w8_SwinIR-M_x3.pth', 
-                                   '001_classicalSR_DIV2K_s48w8_SwinIR-M_x4.pth', '001_classicalSR_DIV2K_s48w8_SwinIR-M_x8.pth', 
-                                   '002_lightweightSR_DIV2K_s64w8_SwinIR-S_x2.pth', '002_lightweightSR_DIV2K_s64w8_SwinIR-S_x3.pth', 
-                                   '002_lightweightSR_DIV2K_s64w8_SwinIR-S_x4.pth', '003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth', 
-                                   '003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_PSNR.pth', '004_grayDN_DFWB_s128w8_SwinIR-M_noise15.pth', 
-                                   '004_grayDN_DFWB_s128w8_SwinIR-M_noise25.pth', '004_grayDN_DFWB_s128w8_SwinIR-M_noise50.pth', 
-                                   '005_colorDN_DFWB_s128w8_SwinIR-M_noise15.pth', '005_colorDN_DFWB_s128w8_SwinIR-M_noise25.pth', 
-                                   '005_colorDN_DFWB_s128w8_SwinIR-M_noise50.pth', '006_CAR_DFWB_s126w7_SwinIR-M_jpeg10.pth', 
-                                   '006_CAR_DFWB_s126w7_SwinIR-M_jpeg20.pth', '006_CAR_DFWB_s126w7_SwinIR-M_jpeg30.pth', 
+                        'SwinIR': ['001_classicalSR_DF2K_s64w8_SwinIR-M_x2.pth', '001_classicalSR_DF2K_s64w8_SwinIR-M_x3.pth',
+                                   '001_classicalSR_DF2K_s64w8_SwinIR-M_x4.pth', '001_classicalSR_DF2K_s64w8_SwinIR-M_x8.pth',
+                                   '001_classicalSR_DIV2K_s48w8_SwinIR-M_x2.pth', '001_classicalSR_DIV2K_s48w8_SwinIR-M_x3.pth',
+                                   '001_classicalSR_DIV2K_s48w8_SwinIR-M_x4.pth', '001_classicalSR_DIV2K_s48w8_SwinIR-M_x8.pth',
+                                   '002_lightweightSR_DIV2K_s64w8_SwinIR-S_x2.pth', '002_lightweightSR_DIV2K_s64w8_SwinIR-S_x3.pth',
+                                   '002_lightweightSR_DIV2K_s64w8_SwinIR-S_x4.pth', '003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth',
+                                   '003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_PSNR.pth', '004_grayDN_DFWB_s128w8_SwinIR-M_noise15.pth',
+                                   '004_grayDN_DFWB_s128w8_SwinIR-M_noise25.pth', '004_grayDN_DFWB_s128w8_SwinIR-M_noise50.pth',
+                                   '005_colorDN_DFWB_s128w8_SwinIR-M_noise15.pth', '005_colorDN_DFWB_s128w8_SwinIR-M_noise25.pth',
+                                   '005_colorDN_DFWB_s128w8_SwinIR-M_noise50.pth', '006_CAR_DFWB_s126w7_SwinIR-M_jpeg10.pth',
+                                   '006_CAR_DFWB_s126w7_SwinIR-M_jpeg20.pth', '006_CAR_DFWB_s126w7_SwinIR-M_jpeg30.pth',
                                    '006_CAR_DFWB_s126w7_SwinIR-M_jpeg40.pth'],
                         'VRT': ['001_VRT_videosr_bi_REDS_6frames.pth', '002_VRT_videosr_bi_REDS_16frames.pth',
                                    '003_VRT_videosr_bi_Vimeo_7frames.pth', '004_VRT_videosr_bd_Vimeo_7frames.pth',
                                    '005_VRT_videodeblurring_DVD.pth', '006_VRT_videodeblurring_GoPro.pth',
                                    '007_VRT_videodeblurring_REDS.pth', '008_VRT_videodenoising_DAVIS.pth'],
-                        'others': ['msrresnet_x4_psnr.pth', 'msrresnet_x4_gan.pth', 'imdn_x4.pth', 'RRDB.pth', 'ESRGAN.pth', 
+                        'others': ['msrresnet_x4_psnr.pth', 'msrresnet_x4_gan.pth', 'imdn_x4.pth', 'RRDB.pth', 'ESRGAN.pth',
                                    'FSSR_DPED.pth', 'FSSR_JPEG.pth', 'RealSR_DPED.pth', 'RealSR_JPEG.pth']
                         }
 
@@ -131,12 +131,3 @@ if __name__ == '__main__':
                     download_pretrained_model(args.model_dir, method_model)
             else:
                 print(f'Do not find {method_model} from the pre-trained model zoo!')
-
-
-
-
-
-
-
-
-       
