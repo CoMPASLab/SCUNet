@@ -202,19 +202,24 @@ def main():
         img_name, ext = os.path.splitext(os.path.basename(img_path))
         img = util.imread_uint(img_path)
 
-        # Monitor GPU memory if available
-        if device.type == 'cuda':
-            allocated_before = torch.cuda.memory_allocated() / 1024**3
-            print(f"GPU memory before processing: {allocated_before:.2f} GB")
+        if n_channels == 3:
+            # Monitor GPU memory if available
+            if device.type == 'cuda':
+                allocated_before = torch.cuda.memory_allocated() / 1024**3
+                print(f"GPU memory before processing: {allocated_before:.2f} GB")
 
-        # Process image
-        use_half = args.half_precision and device.type == 'cuda'
-        denoised_img = denoise_tiled_memory_efficient(model, img, tile_size, tile_overlap, device, use_half)
+            # Process image
+            use_half = args.half_precision and device.type == 'cuda'
+            denoised_img = denoise_tiled_memory_efficient(model, img, tile_size, tile_overlap, device, use_half)
 
-        # Monitor GPU memory after processing
-        if device.type == 'cuda':
-            allocated_after = torch.cuda.memory_allocated() / 1024**3
-            print(f"GPU memory after processing: {allocated_after:.2f} GB")
+            # Monitor GPU memory after processing
+            if device.type == 'cuda':
+                allocated_after = torch.cuda.memory_allocated() / 1024**3
+                print(f"GPU memory after processing: {allocated_after:.2f} GB")
+        else:
+            img = util.uint2single(img)
+            img = util.single2tensor4(img)
+            denoised_img = util.tensor2uint(img.to(device))
 
         # ------------------------------------
         # save results
